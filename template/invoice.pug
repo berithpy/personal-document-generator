@@ -1,0 +1,50 @@
+doctype html
+include ./includes/data.pug
+mixin item(description,price)
+  tr.item
+    td=description
+    td=price
+html
+  head
+    meta(charset="utf-8")
+    title Diego Diaz invoice
+    style
+      include ./includes/invoice.css
+  body
+    div.invoice-box
+      table(cellpadding="0" cellspacing="0")
+        tr(class="top")
+          td(colspan="2")
+            table
+              tr
+                td(class="title")
+                  img(src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.jpg" style="width:100%; max-width:300px;")
+                td(style='white-space:pre;')
+                  |Invoice #: #{invoiceNumber}
+                  |Created: #{invoiceDate}
+                  |Due: #{invoiceDueDate}
+            
+              tr(class="information")
+                td(colspan="2")
+                  table
+                    tr
+                      //- sender
+                      td(style='white-space:pre;')
+                        |#{sender}
+                        |#{senderAddress}
+                        |#{senderCity}
+                      //- recipient
+                      td(style='white-space:pre;')
+                        |#{recipient}
+                        |#{recipientName}
+                        |#{recipientEmail}
+            tr.heading
+              td Item
+              td Price
+            //- this should be a for loop
+            +item("Website desing","$300.00")
+            +item("Hosting (3 months)","$75.50")
+            +item("Domain name(1 year)","$10.00")
+            tr(class="total")
+              td 
+              td Total: $385.50
