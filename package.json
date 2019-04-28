@@ -1,0 +1,23 @@
+{
+  "name": "personal-document-generator",
+  "version": "1.0.0",
+  "description": "Node, pug template based document generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berithpy/personal-document-generator.git"
+  },
+  "author": "berithpy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berithpy/personal-document-generator/issues"
+  },
+  "homepage": "https://github.com/berithpy/personal-document-generator#readme",
+  "dependencies": {
+    "pug": "^2.0.3",
+    "puppeteer": "^1.15.0"
+  }
+}
