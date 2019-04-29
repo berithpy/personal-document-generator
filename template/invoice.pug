@@ -29,14 +29,17 @@ html
                     tr
                       //- sender
                       td(style='white-space:pre;')
+                        |BILL TO
+                        |#{recipient}
+                        |#{recipientAddress}
+                        |#{recipientCity}
+                        |#{recipientEmail}
+                      //- recipient
+                      td(style='white-space:pre;')
                         |#{sender}
                         |#{senderAddress}
                         |#{senderCity}
-                      //- recipient
-                      td(style='white-space:pre;')
-                        |#{recipient}
-                        |#{recipientName}
-                        |#{recipientEmail}
+                        |#{senderEmail}
             tr.heading
               td Item
               td Price

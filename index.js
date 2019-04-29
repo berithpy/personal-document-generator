@@ -3,18 +3,24 @@ const pug = require("pug");
 const fs = require('fs');
 
 // This data should be set by a db or manually set everytime.
-const invoiceNumber = 124
-const invoiceDate = "January 1, 2019"
-const invoiceDueDate = "February 1, 2019"
+const invoiceNumber = 192
+const invoiceDate = "April 29, 2019"
+const invoiceDueDate = "May 1, 2019"
 const senderPicture = "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.jpg"
-const sender = "Placeholder SRL"
-const senderAddress = "12345 Placeholder Road"
-const senderCity = "Placeholder, DC 12345"
-const recipient = "Acme Corp."
-const recipientName = "John Doe"
-const recipientEmail = "john@example.com"
+
+const recipient = "Jon inc"
+const recipientAddress = "4198  Neuport Lane"
+const recipientCity = "Bremen, Maine 04551"
+const recipientEmail = "joninc@fakeemail.com"
+
+const sender = "Laverne K Toner"
+const senderAddress = "3396  Angus Road"
+const senderCity = "New York, New York 10048"
+const senderEmail = "laverne@fakeemail.com"
+
 const itemList = [
-  { description: "Professional Software development services", price: 0 },
+  { description: "Cooking services", price: 40.76 },
+  { description: "Entretainment services", price: 29.76 },
 ]
 let itemTotal=0
 itemList.forEach(item=>{
@@ -28,12 +34,14 @@ const data = {
   invoiceDate: invoiceDate,
   invoiceDueDate: invoiceDueDate,
   senderPicture: senderPicture,
+  recipient: recipient,
+  recipientAddress: recipientAddress,
+  recipientCity: recipientCity,
+  recipientEmail:recipientEmail,
   sender: sender,
   senderAddress: senderAddress,
+  senderEmail: senderEmail,
   senderCity: senderCity,
-  recipient: recipient,
-  recipientName: recipientName,
-  recipientEmail: recipientEmail,
   itemList: itemList,
   itemTotal: itemTotal
 }
