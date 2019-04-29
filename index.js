@@ -14,9 +14,15 @@ const recipient = "Acme Corp."
 const recipientName = "John Doe"
 const recipientEmail = "john@example.com"
 const itemList = [
-  { description: "Professional Software development services", price: "$00.00" },
+  { description: "Professional Software development services", price: 0 },
 ]
-
+let itemTotal=0
+itemList.forEach(item=>{
+  itemTotal+=item.price
+  item.price = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)
+})
+itemTotal=Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(itemTotal)
+console.log(itemTotal)
 const data = {
   invoiceNumber: invoiceNumber,
   invoiceDate: invoiceDate,
@@ -28,7 +34,8 @@ const data = {
   recipient: recipient,
   recipientName: recipientName,
   recipientEmail: recipientEmail,
-  itemList: itemList
+  itemList: itemList,
+  itemTotal: itemTotal
 }
 
 const renderPdf = async function (html) {

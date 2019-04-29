@@ -17,7 +17,7 @@ html
             table
               tr
                 td(class="title")
-                  img(src=senderPicture style="width:100%; max-width:300px;")
+                  img(src=senderPicture style="width:100%; max-width:150px;")
                 td(style='white-space:pre;')
                   |Invoice #: #{invoiceNumber}
                   |Created: #{invoiceDate}
@@ -45,4 +45,4 @@ html
               +item(e.description,e.price)
             tr(class="total")
               td 
-              td Total: $385.50 #{meme}
+              td Total: #{itemTotal}
