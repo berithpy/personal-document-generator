@@ -4,11 +4,12 @@ const fs = require('fs');
 const parser = require('cron-parser');
 
 // This data should be set by a db or manually set everytime.
+const localeOptions = {year: 'numeric', month: 'long', day: 'numeric'}
 const invoiceNumber = 192
-const invoiceDate = "April 29, 2019"
+const invoiceDate = new Date().toLocaleDateString('en-US',localeOptions)
 const cronDueDate = "0 0 1 * *"
 let interval = parser.parseExpression(cronDueDate)
-const invoiceDueDate = interval.next().toDate().toLocaleDateString('en-US',{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+const invoiceDueDate = interval.next().toDate().toLocaleDateString('en-US',localeOptions)
 
 const senderPicture = "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.jpg"
 
@@ -32,7 +33,6 @@ itemList.forEach(item=>{
   item.price = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)
 })
 itemTotal=Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(itemTotal)
-console.log(itemTotal)
 const data = {
   invoiceNumber: invoiceNumber,
   invoiceDate: invoiceDate,
