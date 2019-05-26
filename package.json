@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/berithpy/personal-document-generator#readme",
   "dependencies": {
+    "cron-parser": "^2.11.0",
     "pug": "^2.0.3",
     "puppeteer": "^1.15.0"
   }

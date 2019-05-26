@@ -1,11 +1,15 @@
 const puppeteer = require("puppeteer");
 const pug = require("pug");
 const fs = require('fs');
+const parser = require('cron-parser');
 
 // This data should be set by a db or manually set everytime.
 const invoiceNumber = 192
 const invoiceDate = "April 29, 2019"
-const invoiceDueDate = "May 1, 2019"
+const cronDueDate = "0 0 1 * *"
+let interval = parser.parseExpression(cronDueDate)
+const invoiceDueDate = interval.next().toDate().toLocaleDateString('en-US',{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+
 const senderPicture = "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.jpg"
 
 const recipient = "Jon inc"
