@@ -1,51 +1,51 @@
-const createPdf = require('./renderer')
+const createPdf = require('./renderer');
 const parser = require('cron-parser');
+const firebase = require('firebase');
+require("firebase/firestore");
+const fbCreds = require('./firebaseCredentials')
 
-// This data should be set by a db or manually set everytime.
-const localeOptions = { year: 'numeric', month: 'long', day: 'numeric' }
-const invoiceNumber = 192
-const invoiceDate = new Date().toLocaleDateString('en-US', localeOptions)
-const cronDueDate = "0 0 1 * *"
-let interval = parser.parseExpression(cronDueDate)
-const invoiceDueDate = interval.next().toDate().toLocaleDateString('en-US', localeOptions)
+firebase.initializeApp(fbCreds);
 
-const senderPicture = "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.jpg"
+const db = firebase.firestore();
+const docRef = db.collection("invoice-data").doc("client");
+docRef.get().then(function (doc) {
+  if (doc.exists) {
+    console.log("Document data:", doc.data());
+    const localeOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+    const invoiceNumber = 192
+    const invoiceDate = new Date().toLocaleDateString('en-US', localeOptions)
+    const cronDueDate = "0 0 1 * *"
+    let interval = parser.parseExpression(cronDueDate)
+    const invoiceDueDate = interval.next().toDate().toLocaleDateString('en-US', localeOptions)
 
-const recipient = "Jon inc"
-const recipientAddress = "4198  Neuport Lane"
-const recipientCity = "Bremen, Maine 04551"
-const recipientEmail = "joninc@fakeemail.com"
+    let itemTotal = 0
+    itemList.forEach(item => {
+      itemTotal += item.price
+      item.price = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)
+    })
+    itemTotal = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(itemTotal)
+    const data = {
+      invoiceNumber: invoiceNumber,
+      invoiceDate: invoiceDate,
+      invoiceDueDate: invoiceDueDate,
+      senderPicture: senderPicture,
+      recipient: recipient,
+      recipientAddress: recipientAddress,
+      recipientCity: recipientCity,
+      recipientEmail: recipientEmail,
+      sender: sender,
+      senderAddress: senderAddress,
+      senderEmail: senderEmail,
+      senderCity: senderCity,
+      itemList: itemList,
+      itemTotal: itemTotal
+    }
 
-const sender = "Laverne K Toner"
-const senderAddress = "3396  Angus Road"
-const senderCity = "New York, New York 10048"
-const senderEmail = "laverne@fakeemail.com"
-
-const itemList = [
-  { description: "Cooking services", price: 40.76 },
-  { description: "Entretainment services", price: 29.76 },
-]
-let itemTotal = 0
-itemList.forEach(item => {
-  itemTotal += item.price
-  item.price = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)
-})
-itemTotal = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(itemTotal)
-const data = {
-  invoiceNumber: invoiceNumber,
-  invoiceDate: invoiceDate,
-  invoiceDueDate: invoiceDueDate,
-  senderPicture: senderPicture,
-  recipient: recipient,
-  recipientAddress: recipientAddress,
-  recipientCity: recipientCity,
-  recipientEmail: recipientEmail,
-  sender: sender,
-  senderAddress: senderAddress,
-  senderEmail: senderEmail,
-  senderCity: senderCity,
-  itemList: itemList,
-  itemTotal: itemTotal
-}
-
-createPdf(data);
+    createPdf(data);
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+}).catch(function (error) {
+  console.log("Error getting document:", error);
+});
