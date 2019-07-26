@@ -28,6 +28,7 @@ docRef.get().then(function (doc) {
       itemTotal += item.price
       item.price = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)
     })
+    
     itemTotal = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(itemTotal)
     const pdfData = {
       invoiceNumber: invoiceNumber,
@@ -46,7 +47,7 @@ docRef.get().then(function (doc) {
       itemTotal: itemTotal
     }
     const filename = `ddiaz${moment().format('YMM')}.pdf`
-    createPdf(pdfData,filename);
+    createPdf(pdfData, filename, "template/invoice.pug");
   } else {
     // doc.data() will be undefined in this case
     console.log(`No such document ${dataConfig.collection}!`);

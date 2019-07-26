@@ -21,7 +21,7 @@ const renderPdf = async function (html) {
   return buffer
 }
 
-const createPdf = async function (data, pdfFilePath = "invoice.pdf",template = "template/invoice.pug") {
+const createPdf = async function (data, pdfFilePath ,template) {
   // Compile the source code
   const compiledFunction = pug.compileFile(template);
   let html = compiledFunction(data);
