@@ -32,9 +32,11 @@ const createPdf = async function (data, pdfFilePath ,template) {
   //chage this to where you want to create the file.
   fs.writeFile(pdfFilePath, buffer, function (err) {
     if (err) {
-      return console.log(err);
+      console.log(err);
+      process.exit(1);
     }
     console.log(`The pdf was saved at ${pdfFilePath}`);
+    process.exit(0);
   });
 }
 module.exports = createPdf
