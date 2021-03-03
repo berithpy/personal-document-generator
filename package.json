@@ -19,7 +19,7 @@
   "dependencies": {
     "cron-parser": "^2.11.0",
     "firebase": "^6.0.4",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "puppeteer": "^1.15.0"
   }
 }
