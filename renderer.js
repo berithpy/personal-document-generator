@@ -3,10 +3,11 @@ const pug = require("pug");
 const fs = require('fs');
 
 const renderPdf = async function (html) {
-  const content = html
-  const browser = await puppeteer.launch({ headless: true })
-  const page = await browser.newPage()
-  await page.setContent(content)
+  const content = html;
+  const browser = await puppeteer.launch({ headless: true ,args: ['--no-sandbox', '--disable-dev-shm-usage'] });
+  const page = await browser.newPage();
+  await page.setContent(content);
+  
   const buffer = await page.pdf({
     format: 'A4',
     printBackground: true,
@@ -16,8 +17,8 @@ const renderPdf = async function (html) {
       right: '0px',
       bottom: '0px'
     }
-  })
-  await browser.close()
+  });
+  await browser.close();
   return buffer
 }
 
@@ -25,9 +26,8 @@ const createPdf = async function (data, pdfFilePath ,template) {
   // Compile the source code
   const compiledFunction = pug.compileFile(template);
   let html = compiledFunction(data);
-
   // Render a set of data
-  buffer = await renderPdf(html)
+  buffer = await renderPdf(html);
 
   //chage this to where you want to create the file.
   fs.writeFile(pdfFilePath, buffer, function (err) {
@@ -38,5 +38,6 @@ const createPdf = async function (data, pdfFilePath ,template) {
     console.log(`The pdf was saved at ${pdfFilePath}`);
     process.exit(0);
   });
+
 }
 module.exports = createPdf

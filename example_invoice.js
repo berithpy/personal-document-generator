@@ -1,20 +1,21 @@
 const createPdf = require('./renderer');
 
-const invoiceNumber = 123
-const invoiceDate = "January 1, 2019"
-const invoiceDueDate = "February 1, 2019"
-const sender = "Placeholder SRL"
-const senderAddress = "12345 Placeholder Road"
-const senderCity = "Placeholder, DC 12345"
-const senderEmail = "mike@sender.com"
+const invoiceNumber = 2209 
+const filename = `${invoiceNumber}_JOHNDOE.pdf`
+
+const invoiceDate = "September 1, 2022"
+const invoiceDueDate = "September 10, 2022"
+const sender = "JOHN DOE"
+const senderAddress = "Fake Street 123"
+const senderCity = "Fake City, Fake Country"
+const senderEmail = "FakeEmail@gmail.com"
 
 const senderPicture = "http://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png"
-const recipient = "Acme Corp."
-const recipientEmail = "john@example.com"
-const recipientAddress = "Evergreen 12345"
-const recipientCity = "Greenbow alabama"
-const itemList = [{description:"Website desing",price:300.00},{description:"Hosting (3 months)",price:75.50},{description:"Domain name(1 year)",price:10.00}]
-
+const recipient = "fakecompany"
+const recipientEmail = "accounting@fakecompany.com"
+const recipientAddress = "Evergreen 21021"
+const recipientCity = "Jamaica, NY 11432"
+const itemList = [{description:"Professional software developement services",price:10000.00},{description:"Hosting",price:300.00}]
 let itemTotal = 0
 itemList.forEach(item => {
   itemTotal += item.price
@@ -38,5 +39,4 @@ const pdfData = {
   itemList: itemList,
   itemTotal: itemTotal
 }
-const filename = 'example_invoice.pdf'
 createPdf(pdfData, filename, "template/invoice.pug");
